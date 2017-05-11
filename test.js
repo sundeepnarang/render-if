@@ -3,38 +3,48 @@
 import chai, {expect} from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import renderIf from './renderIf';
+import renderIfElse from './renderIfElse';
 
 chai.use(sinonChai);
 
-describe('renderIf', () => {
+describe('renderIfElse', () => {
   it('should return a function', () => {
-    expect(typeof renderIf()).to.be.eql('function');
+    expect(typeof renderIfElse()).to.be.eql('function');
   });
   describe('non-lazy', () => {
-    it('should return the element when the predicate passes', () => {
-      expect(renderIf(true)('foobar')).to.be.eql('foobar');
+    it('should return the first element when the predicate passes', () => {
+      expect(renderIfElse(true)('truebar','falsebar')).to.be.eql('truebar');
     });
-    it('should not return the element when the predicate fails', () => {
-      expect(renderIf(false)('foobar')).to.be.eql(null);
+    it('should return the second element when the predicate fails', () => {
+      expect(renderIfElse(false)('truebar','falsebar')).to.be.eql('falsebar');
+    });
+    it('should return null element when the predicate fails and no second argument', () => {
+      expect(renderIfElse(false)('foobar')).to.be.eql(null);
     });
   });
   describe('lazy', () => {
-    it('should return the result of the thunk when the predicate passes', () => {
-      expect(renderIf(true)(() => 'foobar')).to.be.eql('foobar');
+    it('should return the result of the thunk of first argument when the predicate passes', () => {
+      expect(renderIfElse(true)(() => 'truebar',() => 'falsebar')).to.be.eql('truebar');
     });
-    it('should not return the result of the thunk when the predicate fails', () => {
-      expect(renderIf(false)(() => 'foobar')).to.be.eql(null);
+    it('should return the result of the thunk of second argument when the predicate fails', () => {
+      expect(renderIfElse(false)(() => 'truebar',() => 'falsebar')).to.be.eql('falsebar');
     });
-    it ('should call the thunk when the predicate passes', () => {
-      var spy = sinon.spy();
-      renderIf(true)(spy);
-      expect(spy).to.have.been.called;
+    it('should return null if no second argument when the predicate fails', () => {
+      expect(renderIfElse(false)(() => 'truebar')).to.be.eql(null);
     });
-    it ('should not call the thunk when the predicate fails', () => {
-      var spy = sinon.spy();
-      renderIf(false)(spy);
-      expect(spy).not.to.have.been.called;
+    it ('should call the first thunk when the predicate passes', () => {
+      var spyTrue = sinon.spy();
+      var spyFalse = sinon.spy();
+      renderIfElse(true)(spyTrue,spyFalse);
+      expect(spyTrue).to.have.been.called;
+      expect(spyFalse).not.to.have.been.called;
+    });
+    it ('should call the second thunk when the predicate fails', () => {
+      var spyTrue = sinon.spy();
+      var spyFalse = sinon.spy();
+      renderIfElse(false)(spyTrue,spyFalse);
+      expect(spyFalse).to.have.been.called;
+      expect(spyTrue).not.to.have.been.called;
     });
   });
 });

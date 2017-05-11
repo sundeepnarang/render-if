@@ -1,28 +1,28 @@
 {
-  "name": "render-if",
-  "version": "0.1.1",
+  "name": "render-ifelse",
+  "version": "0.0.1",
   "description": "Convenient way to render React components",
-  "main": "lib/renderIf.js",
+  "main": "lib/renderIfElse.js",
   "scripts": {
-    "compile": "babel renderIf.js --out-dir lib/",
+    "compile": "babel renderIfElse.js --out-dir lib/",
     "prepublish": "npm run compile",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ajwhite/render-if.git"
+    "url": "git+https://github.com/sundeepnarang/render-ifelse.git"
   },
   "keywords": [
     "react",
     "react-native",
     "render"
   ],
-  "author": "Atticus White <contact@atticuswhite.com> (http://atticuswhite.com/)",
+  "author": "Sundeep Narang <sundeepnrng@gmail.com> (http://sundeepnarang.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ajwhite/render-if/issues"
+    "url": "https://github.com/sundeepnarang/render-ifelse/issues"
   },
-  "homepage": "https://github.com/ajwhite/render-if#readme",
+  "homepage": "https://github.com/sundeepnarang/render-ifelse#readme",
   "devDependencies": {
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.5",

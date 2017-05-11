@@ -2,7 +2,7 @@
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://npmjs.org/package/render-ifelse)
 [![NPM version](http://img.shields.io/npm/v/render-ifelse.svg?style=flat)](https://npmjs.org/package/render-ifelse)
 
-An extension to [render-if](https://github.com/sundeepnarang/render-if) 
+An extension to [render-if](https://github.com/ajwhite/render-if) 
 
 A tiny, yet conveniently curried way to render conditional React components. Works great with both React and React Native.
 
